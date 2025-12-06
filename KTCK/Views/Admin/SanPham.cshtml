@@ -1,0 +1,35 @@
+﻿@model IEnumerable<KTCK.Models.NongSan>
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="text-success">QUẢN LÝ SẢN PHẨM</h2>
+
+<a href="/Admin/ThemSanPham" class="btn btn-primary mb-3">+ Thêm sản phẩm</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-bordered table-hover">
+    <tr class="bg-warning">
+        <th>Mã</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Hình</th>
+        <th>Loại</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.idSP</td>
+            <td>@item.TenSP</td>
+            <td>@item.DonGia.ToString("N0") đ</td>
+            <td><img src="~/Content/Hinhanh/Hinhanh/@item.HinhDaiDien" width="60" /></td>
+            <td>@item.Loai.TenLoai</td>
+        </tr>
+    }
+</table>

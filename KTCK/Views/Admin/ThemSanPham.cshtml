@@ -1,0 +1,46 @@
+﻿@model KTCK.Models.NongSan
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="text-primary">THÊM SẢN PHẨM</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Mã sản phẩm</label>
+        <input name="idSP" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Tên sản phẩm</label>
+        <input name="TenSP" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Đơn giá</label>
+        <input name="DonGia" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Hình đại diện</label>
+        <input name="HinhDaiDien" class="form-control" placeholder="VD: SP5.jpg" />
+    </div>
+
+    <div class="form-group">
+        <label>Mô tả</label>
+        <textarea name="MoTa" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Loại sản phẩm</label>
+        @Html.DropDownList("MaLoaiSP", (SelectList)ViewBag.Loai, "-- Chọn loại --", new { @class = "form-control" })
+    </div>
+
+    <button class="btn btn-success mt-3">Lưu</button>
+</form>

@@ -1,0 +1,14 @@
+﻿@model List<KTCK.Models.Loai>
+
+<ul class="dropdown-menu">
+    @foreach (var l in Model)
+    {
+        <li>
+            <a class="dropdown-item"
+               href="@Url.Action("SPTheoLoai", "Home", new { id = l.MaLoai })">
+                @l.TenLoai
+            </a>
+        </li>
+    }
+</ul>
+

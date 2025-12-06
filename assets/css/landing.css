@@ -266,7 +266,7 @@ a {
 
 .helpful__item:hover {
     transition: 0.5s ease;
-    border-radius: 0 0 20px 20px;
+    border-radius: 20px;
     background: #FFF;
     box-shadow: -6px 9px 64px -4px rgba(118, 118, 118, 0.25);
 }

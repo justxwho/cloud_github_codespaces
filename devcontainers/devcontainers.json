@@ -1,20 +1,31 @@
 {
-  "name": "My Project",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "name": "My Project with SQL Server",
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "dev",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:1": {
       "version": "latest"
     }
   },
+
   "customizations": {
     "vscode": {
       "extensions": [
+        "ms-mssql.mssql",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-typescript-next"
       ]
     }
   },
+
+  "forwardPorts": [3000, 5000, 1433],
+
   "postCreateCommand": "npm install",
-  "forwardPorts": [3000, 5000] 
+
+  "remoteUser": "vscode"
 }

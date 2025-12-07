@@ -1,4 +1,3 @@
-/workspaces/cloud_github_codespaces/PharmaWeb/bin/Debug/net8.0/appsettings.Development.json
 /workspaces/cloud_github_codespaces/PharmaWeb/bin/Debug/net8.0/appsettings.json
 /workspaces/cloud_github_codespaces/PharmaWeb/bin/Debug/net8.0/PharmaWeb.staticwebassets.runtime.json
 /workspaces/cloud_github_codespaces/PharmaWeb/bin/Debug/net8.0/PharmaWeb

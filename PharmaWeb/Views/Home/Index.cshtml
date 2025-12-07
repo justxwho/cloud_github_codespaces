@@ -1,8 +1,94 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<PharmaWeb.Models.Thuoc>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var loaiThuoc = ViewBag.LoaiThuoc as List<PharmaWeb.Models.LoaiThuoc>;
+    var selectedCategory = ViewBag.SelectedCategory as int?;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="bg-light p-5 rounded-3 mb-4 text-center">
+    <h1>Nhà Thuốc 4.0</h1>
+    <p>Chăm sóc sức khỏe toàn diện cho gia đình bạn</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Sidebar danh mục bên trái -->
+        <div class="col-md-3">
+            <div class="sidebar-sticky">
+                <h4 class="sidebar-title">
+                    <i class="fas fa-list-ul"></i> Danh mục
+                </h4>
+                <ul class="category-list">
+                    <li class="category-item">
+                        <a href="/Home/Index" class="category-link @(selectedCategory == null ? "active" : "")">
+                            <i class="fas fa-home category-icon"></i>
+                            Tất cả sản phẩm
+                        </a>
+                    </li>
+                    @if (loaiThuoc != null)
+                    {
+                        @foreach (var loai in loaiThuoc)
+                        {
+                            <li class="category-item">
+                                <a href="/Home/Index?maLoai=@loai.MaLoai" class="category-link @(selectedCategory == loai.MaLoai ? "active" : "")">
+                                    <i class="fas fa-pills category-icon"></i>
+                                    @loai.TenLoai
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="products-section">
+                <h3 class="mb-4 text-primary border-bottom pb-2">
+                    @if (selectedCategory != null)
+                    {
+                        var categoryName = loaiThuoc?.FirstOrDefault(l => l.MaLoai == selectedCategory)?.TenLoai;
+                        <text>@categoryName</text>
+                    }
+                    else
+                    {
+                        <text>Sản phẩm nổi bật</text>
+                    }
+                </h3>
+                <div class="row">
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <img src="~/img/@item.Anh" class="card-img-top" alt="@item.TenThuoc" style="height: 200px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/200'">
+                                    
+                                    <div class="card-body">
+                                        <h5 class="card-title text-truncate">@item.TenThuoc</h5>
+                                        <p class="card-text text-danger fw-bold">@item.Gia?.ToString("N0") đ</p>
+                                        <p class="text-muted small">@item.MaLoaiNavigation?.TenLoai</p>
+                                    </div>
+                                    <div class="card-footer bg-white border-0">
+                                        <a href="/Home/ChiTietSanPham/@item.MaThuoc" class="btn btn-outline-info w-100 mb-2">Xem chi tiết</a>
+                                        <button onclick="addToCart(@item.MaThuoc)" class="btn btn-primary w-100">
+                                            <i class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+                            <h4 class="text-muted">Không có sản phẩm trong danh mục này</h4>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -5,12 +5,160 @@
       "PackagePath": "staticwebassets/PharmaWeb.bundle.scp.css"
     },
     {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/css/landing.css",
+      "PackagePath": "staticwebassets/css/landing.css"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/css/layout.css",
+      "PackagePath": "staticwebassets/css/layout.css"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/css/layout_admin.css",
+      "PackagePath": "staticwebassets/css/layout_admin.css"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/css/reset.css",
+      "PackagePath": "staticwebassets/css/reset.css"
+    },
+    {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-144x144.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-144x144.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-192x192.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-192x192.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-36x36.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-36x36.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-48x48.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-48x48.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-72x72.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-72x72.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/android-icon-96x96.png",
+      "PackagePath": "staticwebassets/favicon/android-icon-96x96.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-114x114.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-114x114.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-120x120.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-120x120.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-144x144.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-144x144.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-152x152.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-152x152.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-180x180.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-180x180.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-57x57.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-57x57.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-60x60.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-60x60.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-72x72.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-72x72.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-76x76.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-76x76.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon-precomposed.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon-precomposed.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/apple-icon.png",
+      "PackagePath": "staticwebassets/favicon/apple-icon.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/browserconfig.xml",
+      "PackagePath": "staticwebassets/favicon/browserconfig.xml"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/favicon-16x16.png",
+      "PackagePath": "staticwebassets/favicon/favicon-16x16.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/favicon-32x32.png",
+      "PackagePath": "staticwebassets/favicon/favicon-32x32.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/favicon-96x96.png",
+      "PackagePath": "staticwebassets/favicon/favicon-96x96.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/favicon.ico",
+      "PackagePath": "staticwebassets/favicon/favicon.ico"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/manifest.json",
+      "PackagePath": "staticwebassets/favicon/manifest.json"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/ms-icon-144x144.png",
+      "PackagePath": "staticwebassets/favicon/ms-icon-144x144.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/ms-icon-150x150.png",
+      "PackagePath": "staticwebassets/favicon/ms-icon-150x150.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/ms-icon-310x310.png",
+      "PackagePath": "staticwebassets/favicon/ms-icon-310x310.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/favicon/ms-icon-70x70.png",
+      "PackagePath": "staticwebassets/favicon/ms-icon-70x70.png"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/augmentin.jpg",
+      "PackagePath": "staticwebassets/img/augmentin.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/entero.jpg",
+      "PackagePath": "staticwebassets/img/entero.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/hapacol.jpg",
+      "PackagePath": "staticwebassets/img/hapacol.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/mask.jpg",
+      "PackagePath": "staticwebassets/img/mask.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/panadol.jpg",
+      "PackagePath": "staticwebassets/img/panadol.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/vitaminc.jpg",
+      "PackagePath": "staticwebassets/img/vitaminc.jpg"
     },
     {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/js/site.js",

@@ -1,0 +1,107 @@
+@{
+    Layout = "_Layout_Admin"; 
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">Chào mừng trở lại, Admin! Đây là tổng quan hệ thống của bạn.</p>
+</div>
+
+<!-- Stats Grid -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-pills"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">@ViewBag.TongThuoc</div>
+            <div class="stat-label">Tổng thuốc</div>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">@string.Format("{0:N0}", ViewBag.TongDoanhThu)</div>
+            <div class="stat-label">Doanh thu</div>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">@ViewBag.TongDonHang</div>
+            <div class="stat-label">Đơn hàng</div>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon red">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">@ViewBag.TongKhachHang</div>
+            <div class="stat-label">Khách hàng</div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="content-card">
+    <div class="card-header-custom">
+        <h2 class="card-title">Thao tác nhanh</h2>
+    </div>
+    
+    <div class="row g-3">
+        <div class="col-md-4">
+            <a href="/Admin/Thuoc" class="btn btn-outline-primary w-100 py-3" style="text-decoration: none;">
+                <i class="fas fa-pills fa-2x mb-2"></i>
+                <div>Quản lý Thuốc</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/Admin/DonHang" class="btn btn-outline-success w-100 py-3" style="text-decoration: none;">
+                <i class="fas fa-shopping-cart fa-2x mb-2"></i>
+                <div>Quản lý Đơn Hàng</div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/Admin/KhachHang" class="btn btn-outline-info w-100 py-3" style="text-decoration: none;">
+                <i class="fas fa-users fa-2x mb-2"></i>
+                <div>Quản lý Khách Hàng</div>
+            </a>
+        </div>
+    </div>
+</div>
+        <h5>Upload ảnh thuốc (Demo)</h5>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" class="form-control mb-2" />
+            <button type="button" onclick="uploadImg()" class="btn btn-dark">Upload</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function uploadImg() {
+            var formData = new FormData($('#uploadForm')[0]);
+            $.ajax({
+                url: '/Admin/UploadImage',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if(res.success) alert('Upload thành công: ' + res.fileName);
+                    else alert('Lỗi: ' + res.message);
+                }
+            });
+        }
+    </script>
+}

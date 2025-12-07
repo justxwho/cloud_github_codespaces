@@ -1,0 +1,431 @@
+@model IEnumerable<PharmaWeb.Models.GioHangChiTiet>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    double tongTien = 0;
+}
+
+<style>
+    .cart-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    .cart-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #1f2937;
+    }
+    
+    .cart-content {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 1.5rem;
+    }
+    
+    .cart-items {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .cart-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        gap: 1rem;
+    }
+    
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+    
+    .item-checkbox {
+        flex-shrink: 0;
+    }
+    
+    .item-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+    
+    .item-info {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .item-name {
+        font-weight: 500;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .item-price-old {
+        text-decoration: line-through;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+    
+    .item-price {
+        color: #ef4444;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #d1d5db;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+    
+    .qty-btn:hover {
+        background: #f3f4f6;
+        border-color: #3b82f6;
+    }
+    
+    .qty-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        padding: 0.25rem;
+        font-weight: 500;
+    }
+    
+    .item-total {
+        min-width: 100px;
+        text-align: right;
+        font-weight: 600;
+        color: #1f2937;
+    }
+    
+    .item-remove {
+        color: #ef4444;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: opacity 0.2s;
+    }
+    
+    .item-remove:hover {
+        opacity: 0.7;
+    }
+    
+    .cart-summary {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+    }
+    
+    .summary-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1f2937;
+    }
+    
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+    
+    .summary-label {
+        color: #6b7280;
+    }
+    
+    .summary-value {
+        font-weight: 500;
+        color: #1f2937;
+    }
+    
+    .summary-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        border-top: 2px solid #e5e7eb;
+    }
+    
+    .summary-total-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .summary-total-value {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ef4444;
+    }
+    
+    .btn-checkout {
+        width: 100%;
+        padding: 0.875rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 1rem;
+    }
+    
+    .btn-checkout:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+    
+    .payment-methods {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e5e7eb;
+    }
+    
+    .payment-option {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .payment-option:hover {
+        border-color: #3b82f6;
+        background: #eff6ff;
+    }
+    
+    .payment-option input[type="radio"] {
+        margin-right: 0.75rem;
+    }
+    
+    .empty-cart {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: white;
+        border-radius: 8px;
+    }
+    
+    .empty-cart-icon {
+        font-size: 4rem;
+        color: #d1d5db;
+        margin-bottom: 1rem;
+    }
+    
+    .empty-cart-text {
+        font-size: 1.1rem;
+        color: #6b7280;
+        margin-bottom: 1rem;
+    }
+    
+    @@media (max-width: 768px) {
+        .cart-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .cart-summary {
+            position: static;
+        }
+    }
+</style>
+
+<div class="cart-container">
+    <h1 class="cart-header">Giỏ hàng của bạn</h1>
+    
+    @if (!Model.Any())
+    {
+        <div class="empty-cart">
+            <div class="empty-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="empty-cart-text">Giỏ hàng đang trống</div>
+            <a href="/" class="btn btn-primary">Tiếp tục mua sắm</a>
+        </div>
+    }
+    else
+    {
+        <div class="cart-content">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                @foreach (var item in Model)
+                {
+                    var thanhTien = (item.MaThuocNavigation.Gia ?? 0) * (item.SoLuong ?? 0);
+                    tongTien += thanhTien;
+                    
+                    <div class="cart-item" data-thuoc-id="@item.MaThuoc">
+                        <div class="item-checkbox">
+                            <input type="checkbox" checked>
+                        </div>
+                        
+                        <img src="~/img/@item.MaThuocNavigation.Anh" 
+                             class="item-image" 
+                             alt="@item.MaThuocNavigation.TenThuoc"
+                             onerror="this.src='https://via.placeholder.com/80'">
+                        
+                        <div class="item-info">
+                            <div class="item-name">@item.MaThuocNavigation.TenThuoc</div>
+                            <div class="item-price">@item.MaThuocNavigation.Gia?.ToString("N0") đ</div>
+                        </div>
+                        
+                        <div class="quantity-control">
+                            <button class="qty-btn qty-minus" onclick="updateQuantity(@item.MaThuoc, -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="@item.SoLuong" 
+                                   id="qty-@item.MaThuoc" readonly>
+                            <button class="qty-btn qty-plus" onclick="updateQuantity(@item.MaThuoc, 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="item-total" id="total-@item.MaThuoc">
+                            @thanhTien.ToString("N0") đ
+                        </div>
+                        
+                        <div class="item-remove" onclick="removeItem(@item.MaThuoc)">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <div class="summary-title">Thông tin thanh toán</div>
+                
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="COD" checked>
+                        <span>Thanh toán khi nhận hàng (COD)</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="Banking">
+                        <span>Chuyển khoản ngân hàng</span>
+                    </label>
+                </div>
+                
+                <div class="summary-total">
+                    <span class="summary-total-label">Tổng cộng:</span>
+                    <span class="summary-total-value" id="cartTotal">@tongTien.ToString("N0") đ</span>
+                </div>
+                
+                <button class="btn-checkout" onclick="checkout()">
+                    Xác nhận đặt hàng
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function updateQuantity(maThuoc, change) {
+            const qtyInput = document.getElementById(`qty-${maThuoc}`);
+            let currentQty = parseInt(qtyInput.value);
+            let newQty = currentQty + change;
+            
+            // Nếu giảm xuống dưới 1, hỏi xóa
+            if (newQty < 1) {
+                if (confirm('Bạn muốn xóa sản phẩm này?')) {
+                    removeItem(maThuoc);
+                }
+                return;
+            }
+            
+            // Cập nhật số lượng
+            $.post('/Cart/UpdateQuantity', { maThuoc: maThuoc, soLuong: newQty }, function(res) {
+                if (res.success) {
+                    qtyInput.value = newQty;
+                    $(`#total-${maThuoc}`).text(res.thanhTien.toLocaleString('vi-VN') + ' đ');
+                    $('#cartTotal').text(res.tongTien.toLocaleString('vi-VN') + ' đ');
+                    
+                    // Update cart badge
+                    if (typeof updateCartCount === 'function') {
+                        updateCartCount();
+                    }
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+        
+        function removeItem(maThuoc) {
+            if (!confirm('Bạn muốn xóa sản phẩm này?')) return;
+            
+            $.post('/Cart/RemoveItem', { maThuoc: maThuoc }, function(res) {
+                if (res.success) {
+                    // Remove item from UI
+                    $(`.cart-item[data-thuoc-id="${maThuoc}"]`).fadeOut(300, function() {
+                        $(this).remove();
+                        
+                        // Check if cart is empty
+                        if ($('.cart-item').length === 0) {
+                            location.reload();
+                        } else {
+                            $('#cartTotal').text(res.tongTien.toLocaleString('vi-VN') + ' đ');
+                        }
+                    });
+                    
+                    // Update cart badge
+                    if (typeof updateCartCount === 'function') {
+                        updateCartCount();
+                    }
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+        
+        function checkout() {
+            var method = $('input[name="payment"]:checked').val();
+            
+            if (!confirm('Bạn chắc chắn muốn đặt hàng?')) return;
+
+            $.post('/Cart/ThanhToan', { phuongThuc: method }, function (res) {
+                if (res.success) {
+                    alert(res.message);
+                    window.location.href = "/Home/Index";
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+    </script>
+}

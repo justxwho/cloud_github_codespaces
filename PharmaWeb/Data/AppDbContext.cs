@@ -16,31 +16,17 @@ public partial class AppDbContext : DbContext
     {
     }
 
-    public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
-
-    public virtual DbSet<DonHang> DonHangs { get; set; }
-
-    public virtual DbSet<DuocSi> DuocSis { get; set; }
-
-    public virtual DbSet<GioHang> GioHangs { get; set; }
-
-    public virtual DbSet<GioHangChiTiet> GioHangChiTiets { get; set; }
-
-    public virtual DbSet<KhachHang> KhachHangs { get; set; }
-
-    public virtual DbSet<LienHe> LienHes { get; set; }
-
-    public virtual DbSet<LoaiThuoc> LoaiThuocs { get; set; }
-
-    public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
-
-    public virtual DbSet<ThanhToan> ThanhToans { get; set; }
-
-    public virtual DbSet<Thuoc> Thuocs { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source=pharmacy.db");
+    public DbSet<TaiKhoan> TaiKhoan { get; set; }
+    public DbSet<KhachHang> KhachHang { get; set; }
+    public DbSet<DuocSi> DuocSi { get; set; }
+    public DbSet<LoaiThuoc> LoaiThuoc { get; set; }
+    public DbSet<Thuoc> Thuoc { get; set; }
+    public DbSet<GioHang> GioHang { get; set; }
+    public DbSet<GioHangChiTiet> GioHangChiTiet { get; set; }
+    public DbSet<DonHang> DonHang { get; set; }
+    public DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
+    public DbSet<ThanhToan> ThanhToan { get; set; }
+    public DbSet<LienHe> LienHe { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

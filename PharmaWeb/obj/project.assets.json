@@ -6028,7 +6028,7 @@
     ]
   },
   "packageFolders": {
-    "/home/codespace/.nuget/packages/": {}
+    "/home/vscode/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6036,11 +6036,11 @@
       "projectUniqueName": "/workspaces/cloud_github_codespaces/PharmaWeb/PharmaWeb.csproj",
       "projectName": "PharmaWeb",
       "projectPath": "/workspaces/cloud_github_codespaces/PharmaWeb/PharmaWeb.csproj",
-      "packagesPath": "/home/codespace/.nuget/packages/",
+      "packagesPath": "/home/vscode/.nuget/packages/",
       "outputPath": "/workspaces/cloud_github_codespaces/PharmaWeb/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/codespace/.nuget/NuGet/NuGet.Config"
+        "/home/vscode/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -6109,7 +6109,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.415/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.416/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

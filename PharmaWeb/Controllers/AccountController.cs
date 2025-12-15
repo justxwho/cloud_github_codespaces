@@ -14,6 +14,9 @@ namespace PharmaWeb.Controllers
             _context = context;
         }
 
+        // ======================
+        // LOGIN
+        // ======================
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
@@ -24,43 +27,60 @@ namespace PharmaWeb.Controllers
         [HttpPost]
         public IActionResult Login(string tendangnhap, string matkhau, string returnUrl = null)
         {
-            // Tìm tài khoản (Lưu ý: SQLite phân biệt hoa thường, nên dùng ToLower nếu cần)
-            var tk = _context.TaiKhoan.FirstOrDefault(t => t.TenDangNhap == tendangnhap && t.MatKhau == matkhau);
-            
-            if (tk != null)
+            // Tìm tài khoản
+            var tk = _context.TaiKhoan
+                .FirstOrDefault(t => t.TenDangNhap == tendangnhap && t.MatKhau == matkhau);
+
+            // ❌ Sai tài khoản hoặc mật khẩu
+            if (tk == null)
             {
-                // Lưu Session
-                HttpContext.Session.SetString("MaTK", tk.MaTk.ToString());
-                HttpContext.Session.SetString("Role", tk.VaiTro);
-                HttpContext.Session.SetString("UserName", tk.TenDangNhap);
-
-                if (tk.VaiTro == "Admin")
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    // Lấy tên khách hàng để hiển thị cho đẹp
-                    var kh = _context.KhachHang.FirstOrDefault(k => k.MaTk == tk.MaTk);
-                    if (kh != null) HttpContext.Session.SetString("UserName", kh.HoTen);
-
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-
-                    return RedirectToAction("Index", "Home");
-                }
+                ViewBag.Error = "Sai tên đăng nhập hoặc mật khẩu!";
+                return View();
             }
 
-            ViewBag.Error = "Sai tên đăng nhập hoặc mật khẩu!";
-            return View();
+            // 🔒 TÀI KHOẢN BỊ KHÓA
+            if (tk.TrangThai == 0)
+            {
+                ViewBag.Error = "Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên!";
+                return View();
+            }
+
+            // ✅ OK → LƯU SESSION
+            HttpContext.Session.SetString("MaTK", tk.MaTk.ToString());
+            HttpContext.Session.SetString("Role", tk.VaiTro);
+            HttpContext.Session.SetString("UserName", tk.TenDangNhap);
+
+            // ADMIN
+            if (tk.VaiTro == "Admin")
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            // KHÁCH HÀNG
+            var kh = _context.KhachHang.FirstOrDefault(k => k.MaTk == tk.MaTk);
+            if (kh != null)
+            {
+                HttpContext.Session.SetString("UserName", kh.HoTen);
+            }
+
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+
+            return RedirectToAction("Index", "Home");
         }
 
+        // ======================
+        // LOGOUT
+        // ======================
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Xóa sạch session
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
 
+        // ======================
+        // REGISTER
+        // ======================
         [HttpGet]
         public IActionResult Register()
         {
@@ -76,18 +96,18 @@ namespace PharmaWeb.Controllers
                 return View();
             }
 
-            // 1. Tạo Tài khoản
+            // 1. Tạo tài khoản
             var tk = new TaiKhoan
             {
                 TenDangNhap = tendangnhap,
                 MatKhau = matkhau,
                 VaiTro = "KhachHang",
-                TrangThai = 1 // 1 là true trong SQLite
+                TrangThai = 1 // MẶC ĐỊNH HOẠT ĐỘNG
             };
             _context.TaiKhoan.Add(tk);
             _context.SaveChanges();
 
-            // 2. Tạo Khách hàng
+            // 2. Tạo khách hàng
             var kh = new KhachHang
             {
                 HoTen = hoten,

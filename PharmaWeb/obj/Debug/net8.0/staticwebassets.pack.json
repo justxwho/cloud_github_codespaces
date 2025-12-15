@@ -137,28 +137,60 @@
       "PackagePath": "staticwebassets/favicon/ms-icon-70x70.png"
     },
     {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/Amoxicillin.jpg",
+      "PackagePath": "staticwebassets/img/Amoxicillin.jpg"
+    },
+    {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/augmentin.jpg",
       "PackagePath": "staticwebassets/img/augmentin.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/azithromycin.jpg",
+      "PackagePath": "staticwebassets/img/azithromycin.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/cetirizin.jpg",
+      "PackagePath": "staticwebassets/img/cetirizin.jpg"
     },
     {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/entero.jpg",
       "PackagePath": "staticwebassets/img/entero.jpg"
     },
     {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/gaviscon.jpg",
+      "PackagePath": "staticwebassets/img/gaviscon.jpg"
+    },
+    {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/hapacol.jpg",
       "PackagePath": "staticwebassets/img/hapacol.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/ibuprofen.jpg",
+      "PackagePath": "staticwebassets/img/ibuprofen.jpg"
     },
     {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/mask.jpg",
       "PackagePath": "staticwebassets/img/mask.jpg"
     },
     {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/omega3.jpg",
+      "PackagePath": "staticwebassets/img/omega3.jpg"
+    },
+    {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/panadol.jpg",
       "PackagePath": "staticwebassets/img/panadol.jpg"
     },
     {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/thermometer.jpg",
+      "PackagePath": "staticwebassets/img/thermometer.jpg"
+    },
+    {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/vitaminc.jpg",
       "PackagePath": "staticwebassets/img/vitaminc.jpg"
+    },
+    {
+      "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/img/vitamind3.jpg",
+      "PackagePath": "staticwebassets/img/vitamind3.jpg"
     },
     {
       "Id": "/workspaces/cloud_github_codespaces/PharmaWeb/wwwroot/js/site.js",

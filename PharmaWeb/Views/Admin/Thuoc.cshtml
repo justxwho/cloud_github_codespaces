@@ -1,0 +1,134 @@
+@model IEnumerable<PharmaWeb.Models.Thuoc>
+
+@{
+    ViewData["Title"] = "Quản lý thuốc";
+    Layout = "_Layout_Admin";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Danh sách thuốc</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd">
+        <i class="fas fa-plus"></i> Thêm thuốc
+    </button>
+</div>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>Tên thuốc</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Loại</th>
+            <th>Kê đơn</th>
+            <th width="120">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td>@t.MaThuoc</td>
+            <td>@t.TenThuoc</td>
+            <td>@((t.Gia ?? 0).ToString("N0")) đ</td>
+            <td>@t.SoLuong</td>
+            <td>@t.MaLoaiNavigation?.TenLoai</td>
+            <td>@(t.CanKeDon == 1 ? "Có" : "Không")</td>
+            <td>
+                <button class="btn btn-sm btn-warning"
+                        onclick="editThuoc(@t.MaThuoc,'@t.TenThuoc',@t.Gia,@t.SoLuong,@t.MaLoai,@t.CanKeDon)">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger"
+                        onclick="deleteThuoc(@t.MaThuoc)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<!-- MODAL ADD -->
+<div class="modal fade" id="modalAdd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Thêm thuốc</h5>
+            </div>
+            <div class="modal-body">
+                <input id="addTen" class="form-control mb-2" placeholder="Tên thuốc" />
+                <input id="addGia" type="number" class="form-control mb-2" placeholder="Giá" />
+                <input id="addSoLuong" type="number" class="form-control mb-2" placeholder="Số lượng" />
+                <select id="addKeDon" class="form-select">
+                    <option value="0">Không kê đơn</option>
+                    <option value="1">Có kê đơn</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="createThuoc()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL EDIT -->
+<div class="modal fade" id="modalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Sửa thuốc</h5>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editId" />
+                <input id="editTen" class="form-control mb-2" />
+                <input id="editGia" type="number" class="form-control mb-2" />
+                <input id="editSoLuong" type="number" class="form-control mb-2" />
+                <select id="editKeDon" class="form-select">
+                    <option value="0">Không kê đơn</option>
+                    <option value="1">Có kê đơn</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" onclick="updateThuoc()">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function createThuoc() {
+    $.post('/Admin/CreateThuoc', {
+        TenThuoc: $('#addTen').val(),
+        Gia: $('#addGia').val(),
+        SoLuong: $('#addSoLuong').val(),
+        CanKeDon: $('#addKeDon').val()
+    }, () => location.reload());
+}
+
+function editThuoc(id, ten, gia, sl, maloai, kedon) {
+    $('#editId').val(id);
+    $('#editTen').val(ten);
+    $('#editGia').val(gia);
+    $('#editSoLuong').val(sl);
+    $('#editKeDon').val(kedon);
+    new bootstrap.Modal('#modalEdit').show();
+}
+
+function updateThuoc() {
+    $.post('/Admin/EditThuoc', {
+        MaThuoc: $('#editId').val(),
+        TenThuoc: $('#editTen').val(),
+        Gia: $('#editGia').val(),
+        SoLuong: $('#editSoLuong').val(),
+        CanKeDon: $('#editKeDon').val()
+    }, () => location.reload());
+}
+
+function deleteThuoc(id) {
+    if (!confirm('Xóa thuốc này?')) return;
+    $.post('/Admin/DeleteThuoc', { id }, () => location.reload());
+}
+</script>
+}

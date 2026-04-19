@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin PharmaWeb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/layout_admin.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <div class="sidebar-title">PharmaWeb</div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-section-title">Dashboard</div>
+                <a href="/Admin/Index" class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="menu-section-title">Quản lý</div>
+                <a href="/Admin/Thuoc" class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "Thuoc" ? "active" : "")">
+                    <i class="fas fa-pills"></i>
+                    <span>Thuốc</span>
+                </a>
+                <a href="/Admin/DonHang" class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "DonHang" ? "active" : "")">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Đơn hàng</span>
+                </a>
+                <a href="/Admin/KhachHang" class="menu-item @(ViewContext.RouteData.Values["Action"]?.ToString() == "KhachHang" ? "active" : "")">
+                    <i class="fas fa-users"></i>
+                    <span>Khách hàng</span>
+                </a>
+                
+                <div class="menu-section-title">Khác</div>
+                <a href="/Home/Index" class="menu-item">
+                    <i class="fas fa-store"></i>
+                    <span>Xem website</span>
+                </a>
+                <a href="/Account/Logout" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm...">
+                </div>
+                
+                <div class="header-actions">       
+                    <div class="admin-user">
+                        <div class="admin-avatar">
+                            @{
+                                var userName = Context.Session.GetString("UserName") ?? "Admin";
+                                var initial = userName.Substring(0, 1).ToUpper();
+                            }
+                            @initial
+                        </div>
+                        <div class="admin-info">
+                            <div class="admin-name">@userName</div>
+                            <div class="admin-role">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content -->
+            <main class="admin-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

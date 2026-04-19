@@ -1,0 +1,145 @@
+@model PharmaWeb.Models.Thuoc
+
+@{
+    ViewData["Title"] = Model.TenThuoc;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active">@Model.TenThuoc</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-5">
+            <img src="~/img/@Model.Anh" class="img-fluid rounded" alt="@Model.TenThuoc" onerror="this.src='https://via.placeholder.com/400'">
+        </div>
+        
+        <div class="col-md-7">
+            <h2 class="mb-3">@Model.TenThuoc</h2>
+            
+            @if (Model.CanKeDon == 1)
+            {
+                <span class="badge bg-danger mb-3">Thuốc kê đơn</span>
+            }
+            
+            <div class="mb-3">
+                <span class="badge bg-info">@Model.MaLoaiNavigation?.TenLoai</span>
+            </div>
+            
+            <h3 class="text-danger mb-4">@Model.Gia?.ToString("N0") VNĐ</h3>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin sản phẩm</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Hoạt chất:</strong> @Model.HoatChat</li>
+                        <li><strong>Hàm lượng:</strong> @Model.HamLuong</li>
+                        <li><strong>Dạng bào chế:</strong> @Model.DangBaoChe</li>
+                        <li><strong>Nhà sản xuất:</strong> @Model.NhaSanXuat</li>
+                        <li><strong>Nước sản xuất:</strong> @Model.NuocSanXuat</li>
+                        <li><strong>Hạn sử dụng:</strong> @Model.HanSuDung</li>
+                        <li><strong>Số đăng ký:</strong> @Model.SoDangKy</li>
+                        <li><strong>Tình trạng:</strong> 
+                            @if (Model.SoLuong > 0)
+                            {
+                                <span class="text-success">Còn hàng (@Model.SoLuong)</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Hết hàng</span>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Số lượng:</label>
+                <input type="number" id="soLuong" class="form-control" value="1" min="1" max="@Model.SoLuong" style="width: 100px;">
+            </div>
+            
+            @if (Model.SoLuong > 0)
+            {
+                <button onclick="themVaoGio()" class="btn btn-primary btn-lg w-100 mb-2">
+                    <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-secondary btn-lg w-100 mb-2" disabled>
+                    Hết hàng
+                </button>
+            }
+            
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100">
+                <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
+            </a>
+        </div>
+    </div>
+    
+    @if (!string.IsNullOrEmpty(Model.MoTa))
+    {
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Mô tả sản phẩm</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>@Model.MoTa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    @if (ViewBag.RelatedProducts != null && ((List<PharmaWeb.Models.Thuoc>)ViewBag.RelatedProducts).Any())
+    {
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="mb-4">Sản phẩm liên quan</h4>
+                <div class="row">
+                    @foreach (var item in (List<PharmaWeb.Models.Thuoc>)ViewBag.RelatedProducts)
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card h-100">
+                                <img src="~/img/@item.Anh" class="card-img-top" alt="@item.TenThuoc" style="height: 200px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/200'">
+                                <div class="card-body">
+                                    <h6 class="card-title text-truncate">@item.TenThuoc</h6>
+                                    <p class="card-text text-danger fw-bold">@item.Gia?.ToString("N0") đ</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <a asp-action="ChiTietSanPham" asp-route-id="@item.MaThuoc" class="btn btn-outline-info btn-sm w-100">
+                                        Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function themVaoGio() {
+            var soLuong = parseInt($('#soLuong').val());
+            addToCart(@Model.MaThuoc, soLuong);
+        }
+        
+        function addToCart(maThuoc, soLuong) {
+            $.post('/Cart/ThemVaoGio', { maSP: maThuoc, soLuong: soLuong || 1 }, function(res) {
+                if(res.success) {
+                    alert(res.message);
+                } else {
+                    window.location.href = '/Account/Login';
+                }
+            });
+        }
+    </script>
+}

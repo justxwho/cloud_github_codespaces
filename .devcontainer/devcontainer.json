@@ -1,0 +1,23 @@
+{
+  "name": "ASP.NET Core Development",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",       
+        "ms-dotnettools.csharp",         
+        "ms-azuretools.vscode-docker",   
+        "editorconfig.editorconfig",     
+        "kreativ-software.csharpextensions" 
+      ]
+    }
+  },
+
+  "containerEnv": {
+    "ASPNETCORE_URLS": "http://0.0.0.0:5000"
+  },
+
+  "forwardPorts": [5000],
+  "postCreateCommand": "dotnet restore"
+}
